@@ -1,0 +1,15 @@
+PR ID,Item ID,Item Name,Supplier ID,Supplier Name,Quantity,Request Date,SM ID, Unit Price, Total Price,Status
+PR001,I001,Rice 10kg,S001,AgroMart Distributors,50,10-05-2025,SM001,25.0,1250.0,Rejected
+PR002,I002,Fresh Chicken,S003,FarmFresh Supplies,30,11-05-2025,SM002,16.0,480.0,Rejected
+PR003,I004,Carrots 1kg,S004,Nature's Harvest,40,12-05-2025,SM003,3.2,128.0,Pending
+PR004,I001,Rice 10kg,S002,Daily Essentials Sdn Bhd,50,13-05-2025,SM004,24.5,1225.0,Approved
+PR005,I007,Eggs Grade A 10s,S002,Daily Essentials Sdn Bhd,100,13-05-2025,SM004,6.2,620.0,Approved
+PR006,I012,Mineral Water 1.5L,S001,AgroMart Distributors,150,14-05-2025,SM002,1.6,240.0,Approved
+PR007,I013,Orange Juice 1L,S007,Fresh Beverages Co.,80,14-05-2025,SM003,4.9,392.0,Approved
+PR008,I009,Sugar 1kg,S001,AgroMart Distributors,120,15-05-2025,SM004,2.8,336.0,Rejected
+PR009,I009,Sugar 1kg,S008,HomeCare Supplies,120,15-05-2025,SM001,2.75,330.0,Approved
+PR010,I014,Bananas 1kg,S004,Nature's Harvest,60,15-05-2025,SM001,4.0,240.0,Pending
+PR011,I002,Fresh Chicken,S005,Dairy World Sdn Bhd,30,16-05-2025,SM002,15.8,474.0,Approved
+PR012,I016,Dishwashing Liquid 1L,S009,GreenClean Products,70,16-05-2025,SM002,5.2,364.0,Approved
+PR013,I019,CookingOil 5kg,S008,HomeCare Supplies,35,26-05-2025,SM003,25.99,909.65,Pending
+PR014,I016,Banana Cake,S006,Bakery Express,47,27-05-2025,SM002,10.50,493.50,Pending

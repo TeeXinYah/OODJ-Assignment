@@ -1,0 +1,22 @@
+Reorder_ID,Item_ID,Item_Name,Supplier_ID,Current_Stock,Reorder_Level,Stock_Status,Unit_Price
+REO001,I001,Rice 10kg,S001,120,100,Low Stock,25.0
+REO002,I002,Rice 10kg,S002,90,100,Low Stock,24.5
+REO003,I003,Fresh Chicken,S001,60,50,Low Stock,15.75
+REO004,I004,Fresh Chicken,S003,40,50,Low Stock,16.0
+REO005,I005,Cooking Oil 5L,S001,150,160,Low Stock,29.9
+REO006,I006,Carrots 1kg,S004,80,50,Low Stock,3.2
+REO007,I007,Instant Noodles,S001,200,150,Low Stock ,5.6
+REO008,I008,Milk 1L,S005,100,120,Low Stock,4.5
+REO009,I009,Eggs Grade A 10s,S002,130,100,Low Stock,6.2
+REO010,I010,Apple 1kg,S004,70,50,Low Stock,7.9
+REO011,I011,Apple 1kg,S006,70,50,Low Stock,8.0
+REO012,I012,Sugar 1kg,S001,140,100,Low Stock,2.8
+REO013,I013,Bread Loaf,S006,60,70,Low Stock,3.5
+REO014,I014,Onion 1kg,S004,90,100,Low Stock,2.7
+REO015,I015,Mineral Water 1.5L,S001,300,200,Low Stock,1.6
+REO016,I016,Orange Juice 1L,S007,120,100,Low Stock,4.9
+REO017,I017,Bananas 1kg,S004,85,90,Low Stock,4.0
+REO018,I018,Tollet Paper 10s,S008,100,100,Low Stock,9.5
+REO019,I019,Dishwashing Liquid 1L,S009,110,80,Low Stock,5.2
+REO020,I020,Shampoo 750ml,S009,75,80,Low Stock,12.9
+REO021,I021,Potato,S010,40,50,Low Stock,0.89

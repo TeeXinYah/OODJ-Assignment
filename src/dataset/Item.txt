@@ -1,0 +1,23 @@
+Item_ID,Item_Name,Supplier_ID,Category,Quantity,Unit_Price
+I001,Rice 10kg,S001,Groceries,120,25.0
+I001,Rice 10kg,S003,Groceries,90,24.5
+I002,Fresh Chicken,S001,Fresh Produce,60,15.75
+I002,Fresh Chicken,S003,Fresh Produce,40,16.0
+I003,Cooking Oil 5L,S001,Groceries,150,29.9
+I004,Carrots 1kg,S004,Fresh Produce,80,3.2
+I005,Instant Noodles,S001,Groceries,200,5.6
+I006,Milk 1L,S005,Dairy,100,4.5
+I007,Eggs Grade A 10s,S002,Dairy,130,6.2
+I008,Apple 1kg,S004,Fruits,70,7.9
+I009,Sugar 1kg,S001,Groceries,140,2.8
+I010,Bread Loaf,S006,Bakery,60,3.5
+I011,Onion 1kg,S004,Fresh Produce,90,2.7
+I012,Mineral Water 1.5L,S001,Beverages,300,1.6
+I013,Orange Juice 1L,S007,Beverages,120,4.9
+I014,Bananas 1kg,S004,Fruits,85,4.0
+I015,Toilet Paper 10s,S008,Household,150,9.5
+I016,Dishwashing Liquid 1L,S009,Household,110,5.2
+I017,Shampoo 750ml,S010,Personal Care,75,12.9
+I018,Yogurt 500g,S005,Dairy,60,6.3
+I021,Potato,S005,Fruits,1,1.0
+I022,Test,S001,Groceries,2,32.0

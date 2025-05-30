@@ -1,0 +1,11 @@
+Supplier_ID,Supplier_Name,Contact No.,Email,Address
+S001,AgroMart Distributors,03-22884455,contact@agromart.com.my,Jalan Kuchai Lama
+S002,Daily Essentials Sdn Bhd,03-33442211,sales@dailyessentials.com.my,88 Jalan Meru
+S003,FarmFresh Supplies,03-77223344,info@farmfreshsupplies.com.my,Selangor
+S004,Nature's Harvest,03-44557788,harvest@natures.com.my,12 Jalan Ampang
+S005,Dairy World Sdn Bhd,03-66778855,cs@dairyworld.my,45 Jalan Ipoh
+S006,Bakery Express,03-33440077,bakery@bakeryexpress.my, Jalan Sentul
+S007,Fresh Beverages Co.,03-55667799,order@freshbev.my,10 Jalan SS2
+S008,HomeCare Supplies,03-77889900,homecare@supplies.my,21A Jalan Taman
+S009,GreenClean Products,03-22335566,support@greenclean.my,No. 7 Jalan Gombak
+S010,Personal Essentials,03-44559922,service@personalessentials.my,11 Jalan Tun Razak
