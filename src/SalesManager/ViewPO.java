@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 
 /**
  *
@@ -77,7 +79,7 @@ public class ViewPO extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ViewPOTable = new javax.swing.JTable();
-        RefreshButton = new javax.swing.JButton();
+        ClearButton = new javax.swing.JButton();
         BackButton2 = new javax.swing.JButton();
         SupplierIDLabel = new javax.swing.JLabel();
         SupplierIDTextField = new javax.swing.JTextField();
@@ -154,11 +156,11 @@ public class ViewPO extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ViewPOTable);
 
-        RefreshButton.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        RefreshButton.setText("Refresh");
-        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
+        ClearButton.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        ClearButton.setText("Clear");
+        ClearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshButtonActionPerformed(evt);
+                ClearButtonActionPerformed(evt);
             }
         });
 
@@ -199,12 +201,12 @@ public class ViewPO extends javax.swing.JFrame {
                 .addComponent(SupplierIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(SearchButton)
+                .addGap(18, 18, 18)
+                .addComponent(ClearButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RefreshButton)
-                .addGap(18, 18, 18)
                 .addComponent(BackButton2)
                 .addGap(12, 12, 12))
         );
@@ -215,13 +217,12 @@ public class ViewPO extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SupplierIDLabel)
                     .addComponent(SupplierIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ClearButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RefreshButton)
-                    .addComponent(BackButton2))
+                .addComponent(BackButton2)
                 .addGap(174, 174, 174))
         );
 
@@ -248,47 +249,29 @@ public class ViewPO extends javax.swing.JFrame {
         new SMDashboard().setVisible(true);
     }//GEN-LAST:event_BackButton2ActionPerformed
 
-    private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
-        loadPOData("src/dataset/PO.txt");
-    }//GEN-LAST:event_RefreshButtonActionPerformed
+    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) ViewPOTable.getModel();
+        
+        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) ViewPOTable.getRowSorter();
+        if (sorter == null) {
+            sorter = new TableRowSorter<>(tableModel);
+            ViewPOTable.setRowSorter(sorter);
+        }
+
+        sorter.setRowFilter(null);
+
+        SupplierIDTextField.setText("");
+    }//GEN-LAST:event_ClearButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-
-        
-String selectedSupplierID = SupplierIDTextField.getText().trim();
-        File file = new File("src/dataset/PO.txt");
-
-    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String filterValue = SupplierIDTextField.getText().trim();
         DefaultTableModel tableModel = (DefaultTableModel) ViewPOTable.getModel();
-        tableModel.setRowCount(0); // Clear existing rows
 
-        String line;
-        br.readLine(); // Skip header
-        while ((line = br.readLine()) != null) {
-            line = line.trim();
-            if (!line.isEmpty()) {
-                String[] data = line.split(",");
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+        ViewPOTable.setRowSorter(sorter);
 
-                // Check if row has correct number of columns
-                if (data.length == tableModel.getColumnCount()) {
-                    if (data[3].trim().equals(selectedSupplierID)) { // Column index 3 = supplier ID
-                        tableModel.addRow(data);
-                    }
-                } else {
-                    System.out.println("Mismatched column count in line: " + line);
-                }
-            }
-        }
-
-        // Optional: make sure text color stays black
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setForeground(Color.BLACK);
-        for (int i = 0; i < ViewPOTable.getColumnCount(); i++) {
-            ViewPOTable.getColumnModel().getColumn(i).setCellRenderer(renderer);
-        }
-    } catch (IOException ex) {
-        JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
-    }
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("^" + filterValue + "$", 2);
+        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void SupplierIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupplierIDTextFieldActionPerformed
@@ -332,7 +315,7 @@ String selectedSupplierID = SupplierIDTextField.getText().trim();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton2;
-    private javax.swing.JButton RefreshButton;
+    private javax.swing.JButton ClearButton;
     private javax.swing.JButton SearchButton;
     private javax.swing.JLabel SupplierIDLabel;
     private javax.swing.JTextField SupplierIDTextField;
