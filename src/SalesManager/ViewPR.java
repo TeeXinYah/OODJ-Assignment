@@ -7,12 +7,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class ViewPR extends javax.swing.JFrame {
 
+    private final String filePath = "src/dataset/PR.txt";
     public ViewPR() {
         initComponents(); 
         
@@ -22,11 +25,11 @@ public class ViewPR extends javax.swing.JFrame {
         "Quantity", "Request Date", "SM ID", "Unit Price", "Total Price", "Status"} ));
         
         //load the item data from txt file
-        loadPRData("src/dataset/PR.txt");
-        }
+        loadPRData();
+    }
     
     // load data method
-    private void loadPRData(String filePath) {
+    private void loadPRData() {
         DefaultTableModel model = (DefaultTableModel) ViewPRTable.getModel();
         model.setRowCount(0); // Clear the table
 
@@ -248,45 +251,30 @@ public class ViewPR extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButton2ActionPerformed
 
     private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
-       loadPRData("src/dataset/PR.txt");
+        DefaultTableModel tableModel = (DefaultTableModel) ViewPRTable.getModel();
+        
+        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) ViewPRTable.getRowSorter();
+        if (sorter == null) {
+            sorter = new TableRowSorter<>(tableModel);
+            ViewPRTable.setRowSorter(sorter);
+        }
+
+        sorter.setRowFilter(null);
+
+        StatusComboBox.setSelectedIndex(0);
+        
+        loadPRData();
     }//GEN-LAST:event_RefreshButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        String selectedSupplierID = StatusComboBox.getSelectedItem().toString().trim();
-        File file = new File("src/dataset/PR.txt");
-
-    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String filterValue = StatusComboBox.getSelectedItem().toString().trim();
         DefaultTableModel tableModel = (DefaultTableModel) ViewPRTable.getModel();
-        tableModel.setRowCount(0); // Clear existing rows
 
-        String line;
-        br.readLine(); // Skip header
-        while ((line = br.readLine()) != null) {
-            line = line.trim();
-            if (!line.isEmpty()) {
-                String[] data = line.split(",");
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+        ViewPRTable.setRowSorter(sorter);
 
-                // Check if row has correct number of columns
-                if (data.length == tableModel.getColumnCount()) {
-                    if (data[10].trim().equals(selectedSupplierID)) { // Column index 10 = Status
-                        tableModel.addRow(data);
-                    }
-                } else {
-                    System.out.println("Mismatched column count in line: " + line);
-                }
-            }
-        }
-
-        // Optional: make sure text color stays black
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setForeground(Color.BLACK);
-        for (int i = 0; i < ViewPRTable.getColumnCount(); i++) {
-            ViewPRTable.getColumnModel().getColumn(i).setCellRenderer(renderer);
-        }
-
-    } catch (IOException ex) {
-        JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
-    }
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("^" + filterValue + "$", 10);
+        sorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void StatusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusComboBoxActionPerformed
